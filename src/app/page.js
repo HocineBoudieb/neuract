@@ -1,101 +1,102 @@
-import Image from "next/image";
+"use client"; // Ce composant est un Client Component
+
+import React, { useEffect } from "react";
+import background from "../assets/background4k.jpg";
+import neurown from "../assets/neurown.png";
+import Header, { rambla } from "@/components/header";
+import { Button } from "@/components/ui/button";
+import TrustCarousel from "@/components/Carousel";
+import PresentationCard from "@/components/PresCard";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  useEffect(() => {
+    // Function to generate stars
+    const createStars = () => {
+      const starContainer = document.querySelector(".stars");
+      if (starContainer) {
+        for (let i = 0; i < 100; i++) {
+          const star = document.createElement("div");
+          star.classList.add("star");
+          star.style.top = `${Math.random() * 100}%`;
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.width = `${Math.random() * 3 + 1}px`;
+          star.style.height = star.style.width;
+          star.style.animationDelay = `${Math.random() * 2}s`;
+          starContainer.appendChild(star);
+        }
+      }
+    };
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    createStars();
+  }, []);
+
+  return (
+    <div className="min-h-screen relative">
+      {/* Background Section */}
+      <div className="relative h-[100vh]">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${background.src})` }}
+        />
+        {/* Overlay gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 md:h-3/4 bg-gradient-to-b from-transparent to-black"></div>
+        {/* Header */}
+        <Header />
+        {/* Centered content */}
+        <main className="relative z-10 flex flex-col items-center justify-center h-3/4 px-4 md:px-8">
+          <div className="text-center">
+            <h1
+              className={`text-white text-7xl md:text-9xl font-extrabold font-serif ${rambla.className}`}
+            >
+              Sounds of your Mind
+            </h1>
+            <div className="mt-8">
+              <Button
+                className={`text-black bg-white ${rambla.className} text-xl hover:bg-white`}
+              >
+                Get Started
+              </Button>
+            </div>
+          </div>
+        </main>
+      </div>
+      {/* TrustCarousel overlay (positioned over both sections) */}
+      <div
+        className="absolute left-0 right-0 z-10"
+        style={{
+          top: "calc(90vh - 50px)",
+        }}
+      >
+        <TrustCarousel />
+      </div>
+      {/* Présentation Section with Starry Background */}
+      <div className="bg-black py-8 h-[200vh] pt-64 relative starry-background">
+        {/* Stars container */}
+        <div className="stars h-1/2"></div>
+        {/* Content */}
+        <p className={`text-white text-5xl font-semibold text-center relative z-10 ${rambla.className}`}>L'ère de</p>
+        <p className={`text-5xl font-semibold text-center relative z-10 ${rambla.className} bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent`}>
+          l'Audio-Thérapie
+        </p>
+        {/* Cards Section */}
+        <div className="flex flex-col justify-center items-center gap-8 mt-16 px-4 relative z-10">
+          <PresentationCard
+            imageUrl={neurown.src}
+            title="NeurOwn"
+            tagline="Chacun son rythme !"
+            description="NeurOwn est le premier dispositif d'audio-thérapie personnalisé. Basé sur l'activité cérébrale, il favorise la relaxation et l'aide à l'endormissement."
+            features={[
+              "Votre activité cérébrale nocturne est enregistrée au cours d’une nuit de sommeil à l'aide d'un petit capteur posé sur le front.",
+              "Vos séquences sonores sont générées dans les 24h via notre application mobile.",
+              "Vos séquences audio personnalisées peuvent être jouées sur tous les types de dispositifs audio (écouteurs, enceinte connectée...).",
+              "Différentes ambiances et paysages sonores sont proposés pour s’adapter aux préférences de chacun."
+            ]}
+            ctaText="En savoir plus"
+            ctaLink="/services"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
