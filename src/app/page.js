@@ -7,6 +7,7 @@ import Header, { rambla } from "@/components/header";
 import { Button } from "@/components/ui/button";
 import TrustCarousel from "@/components/Carousel";
 import PresentationCard from "@/components/PresCard";
+import CardsGrid from "@/components/PurposeCard";
 
 export default function Home() {
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function Home() {
         <TrustCarousel />
       </div>
       {/* Présentation Section with Starry Background */}
-      <div className="bg-black py-8 h-[200vh] pt-64 relative starry-background">
+      <div className="bg-black py-8 pt-64 starry-background">
         {/* Stars container */}
         <div className="stars h-1/2"></div>
         {/* Content */}
@@ -96,6 +97,13 @@ export default function Home() {
             ctaLink="/services"
           />
         </div>
+        <div className="flex flex-col justify-center items-center gap-8 mt-32 px-4 relative z-10">
+          <div className="flex flex-row">
+            <p className={`text-white text-5xl font-semibold text-center relative z-10 ${rambla.className}`}>À quoi ça sert </p> 
+            <p className={`ml-4 text-5xl font-semibold text-center relative z-10 ${rambla.className} bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent`}>? </p>
+          </div>
+        </div>
+        <CardsGrid />
       </div>
     </div>
   );
