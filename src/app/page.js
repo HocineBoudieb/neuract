@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import TrustCarousel from "@/components/Carousel";
 import PresentationCard from "@/components/PresCard";
 import CardsGrid from "@/components/PurposeCard";
-
+import Footer from "@/components/Footer";
 export default function Home() {
   useEffect(() => {
     // Function to generate stars
@@ -105,6 +105,8 @@ export default function Home() {
         </div>
         <CardsGrid />
       </div>
+      <Footer />
     </div>
+    
   );
 }
