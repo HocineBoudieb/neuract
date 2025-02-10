@@ -9,6 +9,8 @@ import TrustCarousel from "@/components/Carousel";
 import PresentationCard from "@/components/PresCard";
 import CardsGrid from "@/components/PurposeCard";
 import Footer from "@/components/Footer";
+import Form from "@/components/Form";
+import CommentsCarousel from "@/components/CommentCarousel";
 export default function Home() {
   useEffect(() => {
     // Function to generate stars
@@ -76,7 +78,7 @@ export default function Home() {
         {/* Stars container */}
         <div className="stars h-1/2"></div>
         {/* Content */}
-        <p className={`text-white text-5xl font-semibold text-center relative z-10 ${rambla.className}`}>L'ère de</p>
+        <p className={` mt-16 text-white text-5xl font-semibold text-center relative z-10 ${rambla.className}`}>L'ère de</p>
         <p className={`text-5xl font-semibold text-center relative z-10 ${rambla.className} bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent`}>
           l'Audio-Thérapie
         </p>
@@ -104,6 +106,12 @@ export default function Home() {
           </div>
         </div>
         <CardsGrid />
+        <div className="flex justify-center items-center mt-64 mb-32 w-full">
+          <CommentsCarousel />
+        </div>
+        <div className="flex justify-center items-center mt-64 mb-32 w-full">
+          <Form /> 
+        </div>
       </div>
       <Footer />
     </div>

@@ -1,39 +1,43 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import TrustCard from "./TrustCard";
+import CommentCard from "./CommentCards";
 
-const trustCardsData = [
+// Sample data for comment cards
+const commentData = [
   {
-    brand: "Fondateur",
-    name: "Luc Foubert",
-    title: "Visionnaire derrière NeurAct, expert en neurosciences et technologies cognitives."
+    username: "Alice",
+    date: "2025-02-01",
+    comment: "Great work on the project! Really impressed with the design."
   },
   {
-    brand: "NeurAct",
-    name: "Neuro Acoustic Transduction",
-    title: "Entreprise spécialisée dans la conversion de signaux physiologiques en expériences sensorielles innovantes."
+    username: "Bob",
+    date: "2025-02-02",
+    comment: "I love this feature. It's intuitive and user-friendly."
   },
   {
-    brand: "NeurOwn",
-    name: "Système d'audio-thérapie",
-    title: "Un dispositif basé sur l'EEG dédié à la relaxation et l'aide à l’endormissement."
+    username: "Carol",
+    date: "2025-02-03",
+    comment: "The layout is fantastic, and the responsiveness is top-notch."
   },
   {
-    brand: "Sonification EEG",
-    name: "Transformer les signaux cérébraux en sons",
-    title: "Une approche innovante pour moduler et induire des états cérébraux à travers le son."
+    username: "Dave",
+    date: "2025-02-04",
+    comment: "Keep up the good work. Looking forward to more updates!"
   }
 ];
 
-const TrustCarousel = () => {
-  // Refs and states for the auto scroll functionality
+// Duplicate comments for an infinite-loop effect
+const comments = [...commentData, ...commentData];
+
+const CommentsCarousel = () => {
+  // Refs and states for auto-scroll functionality
   const containerRef = useRef(null);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isFullyVisible, setIsFullyVisible] = useState(false);
 
   // States for drag functionality
-  // When a user starts dragging, we disable the auto scroll (CSS animation)
+  // Auto scroll is disabled when the user starts dragging.
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
@@ -41,9 +45,6 @@ const TrustCarousel = () => {
   // Refs to store starting X positions for dragging
   const dragStartXRef = useRef(0);
   const initialDragOffsetRef = useRef(0);
-
-  // Duplicate cards for infinite-loop effect
-  const cards = [...trustCardsData, ...trustCardsData];
 
   // Listen for the first scroll event on the window.
   useEffect(() => {
@@ -61,13 +62,13 @@ const TrustCarousel = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // When the entire container is visible, intersectionRatio will be 1.
+          // When 100% of the container is visible, intersectionRatio === 1.
           setIsFullyVisible(entry.intersectionRatio === 1);
         });
       },
       {
         root: null,     // relative to the viewport
-        threshold: 1.0, // 100% of the container must be visible
+        threshold: 1.0, // 100% visibility
       }
     );
 
@@ -77,14 +78,13 @@ const TrustCarousel = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Only animate if auto scroll is still enabled
+  // Only animate if auto scroll is enabled and the container is visible.
   const isAnimating = autoScrollEnabled && hasScrolled && isFullyVisible;
 
   // --- DRAG EVENT HANDLERS ---
 
   // Mouse events
   const handleMouseDown = (e) => {
-    // Disable auto scroll once user begins dragging
     setAutoScrollEnabled(false);
     setIsDragging(true);
     dragStartXRef.current = e.clientX;
@@ -123,8 +123,7 @@ const TrustCarousel = () => {
     setIsDragging(false);
   };
 
-  // Define the style for the inner container.
-  // When auto scrolling, we use the CSS animation. When the user drags,
+  // When auto scrolling, we rely on the CSS animation. When the user drags,
   // we remove the animation and apply a transform based on dragOffset.
   const innerStyle = autoScrollEnabled
     ? { animationPlayState: isAnimating ? "running" : "paused" }
@@ -149,9 +148,13 @@ const TrustCarousel = () => {
         className="flex space-x-4 whitespace-nowrap py-4 px-10 animate-scroll"
         style={innerStyle}
       >
-        {cards.map((data, index) => (
+        {comments.map((data, index) => (
           <div key={index} className="flex-shrink-0">
-            <TrustCard brand={data.brand} name={data.name} title={data.title} />
+            <CommentCard
+              username={data.username}
+              date={data.date}
+              comment={data.comment}
+            />
           </div>
         ))}
       </div>
@@ -159,4 +162,4 @@ const TrustCarousel = () => {
   );
 };
 
-export default TrustCarousel;
+export default CommentsCarousel;

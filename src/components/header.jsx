@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Rambla } from "next/font/google";
+import { Rambla, Roboto } from "next/font/google";
 import logo from "../assets/neuract_logo.png";
 export const rambla = Rambla({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
-
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -19,24 +18,24 @@ export default function Header() {
           <img src={logo.src} alt="Logo" className="w-20 h-15" />
         </div>
         {/* Navigation en mode desktop */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 ">
           <Link href="/" passHref>
-            <Button variant="ghost" className="text-black bg-white">
+            <Button variant="ghost" className="text-white">
               Accueil
             </Button>
           </Link>
           <Link href="/services" passHref>
-            <Button variant="ghost" className="text-black bg-white">
+            <Button variant="ghost" className="text-white">
               Produit
             </Button>
           </Link>
           <Link href="/about" passHref>
-            <Button variant="ghost" className="text-black bg-white">
+            <Button variant="ghost" className="text-white">
               À propos
             </Button>
           </Link>
           <Link href="/contact" passHref>
-            <Button variant="ghost" className="text-black bg-white">
+            <Button variant="ghost" className="text-white">
               Contact
             </Button>
           </Link>
