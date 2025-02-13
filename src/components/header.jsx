@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Rambla, Roboto } from "next/font/google";
+import { Rambla, Poppins } from "next/font/google";
 import logo from "../assets/neuract_logo.png";
 export const rambla = Rambla({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
+export const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["200","400", "700"],
+})
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -24,7 +28,7 @@ export default function Header() {
               Accueil
             </Button>
           </Link>
-          <Link href="/services" passHref>
+          <Link href="/product" passHref>
             <Button variant="ghost" className="text-white">
               Produit
             </Button>
@@ -91,13 +95,13 @@ export default function Header() {
                 Accueil
               </Button>
             </Link>
-            <Link href="/services" passHref>
+            <Link href="/product" passHref>
               <Button
                 variant="ghost"
                 className="text-black bg-white w-full text-left"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Services
+                Produit
               </Button>
             </Link>
             <Link href="/about" passHref>

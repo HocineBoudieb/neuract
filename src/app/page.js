@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import background from "../assets/background4k.jpg";
 import neurown from "../assets/neurown.png";
-import Header, { rambla } from "@/components/header";
+import Header, { rambla, poppins } from "@/components/header";
 import { Button } from "@/components/ui/button";
 import TrustCarousel from "@/components/Carousel";
 import PresentationCard from "@/components/PresCard";
@@ -11,27 +11,9 @@ import CardsGrid from "@/components/PurposeCard";
 import Footer from "@/components/Footer";
 import Form from "@/components/Form";
 import CommentsCarousel from "@/components/CommentCarousel";
+import { ReactNebula } from "@flodlc/nebula";
+import Link from "next/link";
 export default function Home() {
-  useEffect(() => {
-    // Function to generate stars
-    const createStars = () => {
-      const starContainer = document.querySelector(".stars");
-      if (starContainer) {
-        for (let i = 0; i < 100; i++) {
-          const star = document.createElement("div");
-          star.classList.add("star");
-          star.style.top = `${Math.random() * 100}%`;
-          star.style.left = `${Math.random() * 100}%`;
-          star.style.width = `${Math.random() * 3 + 1}px`;
-          star.style.height = star.style.width;
-          star.style.animationDelay = `${Math.random() * 2}s`;
-          starContainer.appendChild(star);
-        }
-      }
-    };
-
-    createStars();
-  }, []);
 
   return (
     <div className="min-h-screen relative">
@@ -54,12 +36,18 @@ export default function Home() {
             >
               Sounds of your Mind
             </h1>
+            <p className={`mt-8 text-white text-xl md:text-2xl font-thin max-w-md mx-auto ${poppins.className}`}>
+            Solution d’aide à l’endormissement personnalisée 
+            basée sur votre activité cérébrale de sommeil !
+            </p>
             <div className="mt-8">
-              <Button
-                className={`text-black bg-white ${rambla.className} text-xl hover:bg-white`}
-              >
-                Get Started
-              </Button>
+              <Link href="/product">
+                <Button
+                  className={`text-black bg-white ${rambla.className} text-xl hover:bg-white`}
+                >
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </main>
@@ -74,9 +62,16 @@ export default function Home() {
         <TrustCarousel />
       </div>
       {/* Présentation Section with Starry Background */}
-      <div className="bg-black py-8 pt-64 starry-background">
-        {/* Stars container */}
-        <div className="stars h-1/2"></div>
+      <div className="bg-black py-8 pt-64 relative">
+      {/* Starry background effect */}
+      <div className="absolute inset-0 opacity-50">
+        <ReactNebula config={{
+               starsCount: 600,
+               starsRotationSpeed: 2,
+               nebulasIntensity: 8,
+               sunScale:0,
+           }}/>
+        </div>
         {/* Content */}
         <p className={` mt-16 text-white text-5xl font-semibold text-center relative z-10 ${rambla.className}`}>L'ère de</p>
         <p className={`text-5xl font-semibold text-center relative z-10 ${rambla.className} bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent`}>
@@ -96,7 +91,7 @@ export default function Home() {
               "Différentes ambiances et paysages sonores sont proposés pour s’adapter aux préférences de chacun."
             ]}
             ctaText="En savoir plus"
-            ctaLink="/services"
+            ctaLink="/product"
           />
         </div>
         <div className="flex flex-col justify-center items-center gap-8 mt-32 px-4 relative z-10">
@@ -109,9 +104,7 @@ export default function Home() {
         <div className="flex justify-center items-center mt-64 mb-32 w-full">
           <CommentsCarousel />
         </div>
-        <div className="flex justify-center items-center mt-64 mb-32 w-full">
-          <Form /> 
-        </div>
+       
       </div>
       <Footer />
     </div>
