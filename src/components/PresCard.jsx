@@ -19,22 +19,19 @@ const PresentationCard = ({
   ctaLink,
 }) => {
   return (
-    <Card className="mx-auto max-w-5xl rounded-xl shadow-2xl bg-black relative overflow-hidden border border-transparent">
-      {/* Background Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900 to-black opacity-80 rounded-xl" />
-
-      <CardContent className="relative z-10 p-8">
+    <Card className="mx-auto max-w-5xl p-4 rounded-md bg-black/80 border border-white/20 hover:border-white/40 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+      <CardContent className="relative z-10">
         {/* Grid Layout: Text (Left) - Image (Right) */}
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
           {/* Left Side: Text Content */}
           <div className="flex flex-col space-y-6 text-left">
             {/* Title */}
-            <h2 className={`text-5xl text-white ${rambla.className} `}>
+            <h2 className={`text-5xl text-white ${rambla.className}`}>
               {title}
             </h2>
 
             {/* Tagline */}
-            <p className="text-xl text-gray-300">{tagline} </p>
+            <p className="text-xl text-gray-300">{tagline}</p>
 
             {/* Description */}
             <p className="text-lg text-gray-400 leading-relaxed">
@@ -44,7 +41,7 @@ const PresentationCard = ({
             {/* CTA Button */}
             <a
               href={ctaLink}
-              className="mt-4 px-6 py-3 text-lg font-semibold text-white border border-gray-700 rounded-lg bg-gradient-to-r from-gray-900 to-black transition-all duration-300 hover:border-gray-500 hover:shadow-lg w-1/2"
+              className="mt-4 px-6 py-3 text-lg font-semibold text-white border border-white/20 rounded-lg hover:border-white/40 transition-all duration-300 w-1/2"
             >
               {ctaText}
             </a>

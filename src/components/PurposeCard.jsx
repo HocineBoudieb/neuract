@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = ({ icon, title, description }) => {
   return (
-    <div className="p-6 rounded-xl shadow-xl bg-gradient-to-r from-black via-gray-900 to-black text-white border border-gray-800 relative overflow-hidden flex flex-col items-center text-center max-w-sm h-full">
+    <div className="p-6 rounded-xl shadow-xl bg-black text-white border border-gray-800 relative overflow-hidden flex flex-col items-center text-center max-w-sm h-full z-10">
       <div className="mb-4">{icon}</div>
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="text-gray-400 mt-2">{description}</p>
@@ -12,7 +12,7 @@ const Card = ({ icon, title, description }) => {
 
 const CardsGrid = () => {
   return (
-    <div className="flex justify-center items-center mt-8 bg-black">
+    <div className="flex justify-center items-center mt-8">
       <div className="grid md:grid-cols-2 gap-6 px-6 md:px-12 py-8">
         <Card
           icon={<span className="text-yellow-500 text-4xl">✅</span>}

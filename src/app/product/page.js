@@ -25,7 +25,6 @@ export default function ProductPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {/* Cosmic Hero Section */}
       <div className='h-[100vh] w-full relative overflow-hidden'>
         <div className="absolute inset-0 z-10">
             <Header />
@@ -62,7 +61,8 @@ export default function ProductPage() {
           }}
         />
       </div>
-
+        
+      <div className="absolute bottom-0 inset-x-0 h-1/4 bg-gradient-to-b from-transparent to-black w-full z-10"></div>
       {/* Flèche animée pour inciter à scroller */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
         <svg
@@ -76,10 +76,8 @@ export default function ProductPage() {
         </svg>
       </div>
 
-      {/* Product Content */}
-      <div className='relative bg-black h-[350vh] w-full'>
         <ProductContent />
-      </div>
     </div>
   );
 }
+
