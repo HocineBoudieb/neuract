@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
@@ -10,6 +11,18 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
+
+// Portal component to render children in document.body
+function AudioPlayerPortal({ children }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+  return createPortal(children, document.body);
+}
 
 export default function TrackItem({ track, isActive, onToggle }) {
   const audioRef = useRef(null);
@@ -80,19 +93,21 @@ export default function TrackItem({ track, isActive, onToggle }) {
       </div>
 
       {isActive && (
-        <div className="fixed bottom-0 left-0 w-full p-4 z-50">
-          <AudioPlayer
-            ref={audioRef}
-            src={track.audioUrl}
-            showJumpControls={false}
-            showDownloadProgress={false}
-            customAdditionalControls={[]}
-            customVolumeControls={[]}
-            layout="horizontal-reverse"
-            className="bg-transparent"
-            autoPlay // Starts playing automatically when visible
-          />
-        </div>
+        <AudioPlayerPortal>
+          <div className="fixed bottom-0 left-0 w-full p-4 z-50">
+            <AudioPlayer
+              ref={audioRef}
+              src={track.audioUrl}
+              showJumpControls={false}
+              showDownloadProgress={false}
+              customAdditionalControls={[]}
+              customVolumeControls={[]}
+              layout="horizontal-reverse"
+              className="bg-transparent"
+              autoPlay // Starts playing automatically when visible
+            />
+          </div>
+        </AudioPlayerPortal>
       )}
     </div>
   );
